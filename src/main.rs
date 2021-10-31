@@ -63,10 +63,10 @@ fn main() {
   );
 
   // write buffer
-  command_queue.enqueue_write_buffer(&mut a_buffer, opencl3::types::CL_TRUE, 0, &a, &[]).expect(
+  command_queue.enqueue_write_buffer(&mut a_buffer, opencl3::types::CL_TRUE, 0, &a[..], &[]).expect(
     "Failed to write buffer a."
   );
-  command_queue.enqueue_write_buffer(&mut b_buffer, opencl3::types::CL_TRUE, 0, &b, &[]).expect(
+  command_queue.enqueue_write_buffer(&mut b_buffer, opencl3::types::CL_TRUE, 0, &b[..], &[]).expect(
     "Failed to write buffer b."
   );
 
@@ -81,7 +81,7 @@ fn main() {
     .enqueue_nd_range(&command_queue)
     .expect("Failed to enqueue kernel execution.");
 
-  command_queue.enqueue_read_buffer(&mut c_buffer, opencl3::types::CL_TRUE, 0, &mut c, &[kernel_event.get()]).expect(
+  command_queue.enqueue_read_buffer(&mut c_buffer, opencl3::types::CL_TRUE, 0, &mut c[..], &[kernel_event.get()]).expect(
     "Failed to read buffer c."
   );
 
