@@ -72,14 +72,14 @@ fn main() {
 
   // execute kernel
   let kernel_event = opencl3::kernel::ExecuteKernel::new(&kernel)
-  .set_arg(&a_buffer)
-  .set_arg(&b_buffer)
-  .set_arg(&c_buffer)
-  .set_global_work_size(10)
-  .set_local_work_size(1)
-  .set_global_work_offset(0)
-  .enqueue_nd_range(&command_queue)
-  .expect("Failed to enqueue kernel execution.");
+    .set_arg(&a_buffer)
+    .set_arg(&b_buffer)
+    .set_arg(&c_buffer)
+    .set_global_work_size(10)
+    .set_local_work_size(1)
+    .set_global_work_offset(0)
+    .enqueue_nd_range(&command_queue)
+    .expect("Failed to enqueue kernel execution.");
 
   command_queue.enqueue_read_buffer(&mut c_buffer, opencl3::types::CL_TRUE, 0, &mut c, &[kernel_event.get()]).expect(
     "Failed to read buffer c."
